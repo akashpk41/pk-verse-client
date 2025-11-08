@@ -10,6 +10,8 @@ import {
   User,
 } from "lucide-react";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { Link } from "react-router";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -23,19 +25,27 @@ const Signup = () => {
 
   const handleSignup = (e) => {
     e.preventDefault();
+
+    if (formData.fullName.length < 3) {
+      return toast.error("Name Is To Short🙂");
+    }
+    if (!formData.fullName.trim())
+      return toast.error("Full Name Is Required🙂");
+    if (!formData.email.trim()) return toast.error("Email Is Required😎");
+    if (!/\S+@\S+\.\S+/.test(formData.email))
+      return toast.error("Invalid Email Format😒");
+    if (!formData.password) return toast.error("Password Is Required😒");
+    if (formData.password.length < 6)
+      return toast.error("Password Must Be At Least 6 Characters😭");
+
     setIsSigningUp(true);
     console.log("Signup with:", formData);
     setTimeout(() => setIsSigningUp(false), 2000);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-1 sm:p-6 md:p-8 bg-gradient-to-br from-base-200 via-base-100 to-base-200">
-      <motion.div
-        className="border-2 border-primary/50 flex flex-col md:flex-row w-full max-w-6xl mx-auto bg-base-100/80 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden relative"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-      >
+    <div className="md:min-h-screen mt-10 flex items-center justify-center p-1 sm:p-6 md:p-8 bg-gradient-to-br from-base-200 via-base-100 to-base-200">
+      <motion.div className="border-2 border-primary/50 flex flex-col md:flex-row w-full max-w-6xl mx-auto bg-base-100/80 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden relative">
         {/* Animated background glow */}
         <motion.div
           className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 rounded-2xl blur-3xl -z-10"
@@ -87,7 +97,7 @@ const Signup = () => {
             </motion.div>
 
             <motion.span
-              className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent"
+              className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-error via-secondary to-accent"
               animate={{
                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
               }}
@@ -111,10 +121,10 @@ const Signup = () => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3 }}
               >
-                <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                <h2 className="text-3xl text-center md:text-4xl font-bold bg-gradient-to-r from-warning to-secondary bg-clip-text text-transparent">
                   Create an Account
                 </h2>
-                <p className="text-md md:text-lg mt-3 leading-relaxed">
+                <p className="text-md text-center md:text-lg mt-3 leading-relaxed">
                   <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent font-bold text-lg">
                     Join thousands of learners
                   </span>
@@ -161,6 +171,7 @@ const Signup = () => {
                       type="text"
                       placeholder="Your Full Name"
                       className="input input-bordered text-base w-full pl-12 h-14 rounded-xl bg-base-200 border-2 border-base-300 focus:border-primary focus:bg-base-100 focus:outline-none focus:shadow-lg focus:shadow-primary/20 transition-all duration-300 hover:border-primary/50"
+                      minLength={3}
                       value={formData.fullName}
                       onChange={(e) =>
                         setFormData({ ...formData, fullName: e.target.value })
@@ -314,12 +325,12 @@ const Signup = () => {
               >
                 <p className="text-lg">
                   Already have an account?{" "}
-                  <a
-                    href="/login"
+                  <Link
+                    to="/login"
                     className="text-primary font-semibold underline underline-offset-4 hover:text-primary/80 transition-colors"
                   >
                     Log in
-                  </a>
+                  </Link>
                 </p>
               </motion.div>
             </div>
