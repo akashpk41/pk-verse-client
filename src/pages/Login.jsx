@@ -172,7 +172,7 @@ const Login = () => {
                     </div>
                     <input
                       type={showPassword ? "text" : "password"}
-                      placeholder="••••••••"
+                      placeholder="any password@1971"
                       className="input input-bordered text-base w-full pl-12 pr-12 h-14 rounded-xl bg-base-200 border-2 border-base-300 focus:border-primary focus:bg-base-100 focus:outline-none focus:shadow-lg focus:shadow-primary/20 transition-all duration-300 hover:border-primary/50"
                       value={loginData.password}
                       onChange={(e) =>
@@ -182,7 +182,7 @@ const Login = () => {
                     />
                     <button
                       type="button"
-                      className="absolute inset-y-0 right-0 pr-4 flex items-center text-base-content/50 hover:text-primary transition-all duration-200 hover:scale-110"
+                      className="absolute cursor-pointer inset-y-0 right-0 pr-4 flex items-center text-base-content/50 hover:text-primary transition-all duration-200 hover:scale-110"
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? (

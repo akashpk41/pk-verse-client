@@ -1,3 +1,4 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import {
   Eye,
@@ -12,10 +13,10 @@ import {
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router";
+import { signup } from "../lib/api";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [isSigningUp, setIsSigningUp] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -23,12 +24,23 @@ const Signup = () => {
     agreeTerms: false,
   });
 
+  const queryClient = useQueryClient();
+
+  // post the data to the server;
+  const {
+    mutate: signupMutation,
+    isPending,
+    error,
+  } = useMutation({
+    mutationFn: signup,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["authUser"] }),
+  });
+
   const handleSignup = (e) => {
     e.preventDefault();
 
-    if (formData.fullName.length < 3) {
-      return toast.error("Name Is To Short🙂");
-    }
+    if (formData.fullName.length < 3) return toast.error("Name Is To Short🙂");
+
     if (!formData.fullName.trim())
       return toast.error("Full Name Is Required🙂");
     if (!formData.email.trim()) return toast.error("Email Is Required😎");
@@ -38,9 +50,7 @@ const Signup = () => {
     if (formData.password.length < 6)
       return toast.error("Password Must Be At Least 6 Characters😭");
 
-    setIsSigningUp(true);
-    console.log("Signup with:", formData);
-    setTimeout(() => setIsSigningUp(false), 2000);
+    signupMutation(formData);
   };
 
   return (
@@ -113,6 +123,13 @@ const Signup = () => {
               PK Verse
             </motion.span>
           </motion.div>
+
+          {error && (
+            <p className="alert alert-error  text-center ">
+              {" "}
+              {error.response.data.message}{" "}
+            </p>
+          )}
 
           <div className="w-full mt-5">
             <div className="space-y-6">
@@ -228,7 +245,7 @@ const Signup = () => {
                     </div>
                     <input
                       type={showPassword ? "text" : "password"}
-                      placeholder="••••••••"
+                      placeholder="any password@1971"
                       className="input input-bordered text-base w-full pl-12 pr-12 h-14 rounded-xl bg-base-200 border-2 border-base-300 focus:border-primary focus:bg-base-100 focus:outline-none focus:shadow-lg focus:shadow-primary/20 transition-all duration-300 hover:border-primary/50"
                       value={formData.password}
                       onChange={(e) =>
@@ -238,7 +255,7 @@ const Signup = () => {
                     />
                     <button
                       type="button"
-                      className="absolute inset-y-0 right-0 pr-4 flex items-center text-base-content/50 hover:text-primary transition-all duration-200 hover:scale-110"
+                      className="absolute cursor-pointer inset-y-0 right-0 pr-4 flex items-center text-base-content/50 hover:text-primary transition-all duration-200 hover:scale-110"
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? (
@@ -291,17 +308,17 @@ const Signup = () => {
               <motion.button
                 className="btn btn-lg text-xl btn-primary w-full h-16 rounded-xl shadow-xl shadow-primary/40 hover:shadow-2xl hover:shadow-primary/60 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-bold"
                 onClick={handleSignup}
-                disabled={isSigningUp}
+                disabled={isPending}
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.8 }}
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
-                {isSigningUp ? (
+                {isPending ? (
                   <div className="flex items-center gap-2">
                     <Loader2 className="size-6 animate-spin" />
-                    Creating account...
+                    Creating Account...
                   </div>
                 ) : (
                   <div className="flex items-center gap-2">

@@ -49,6 +49,9 @@ function App() {
           path="/profile"
           element={authUser ? <Profile /> : <Navigate to="/login" />}
         />
+
+        {/* testing */}
+        {/* <Route path="/onboarding" element={<Onboarding />} /> */}
       </Routes>
       <Toaster />
     </div>
