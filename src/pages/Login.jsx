@@ -1,22 +1,32 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Gem, Loader2, Lock, Mail } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
+import { login } from "../lib/api";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
 
+  const queryClient = useQueryClient();
+  const {
+    mutate: loginMutation,
+    isPending,
+    error,
+  } = useMutation({
+    mutationFn: login,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["authUser"] }),
+  });
+
   const handleLogin = (e) => {
     e.preventDefault();
-    setIsLoggingIn(true);
-    console.log("Login with:", loginData);
-    setTimeout(() => setIsLoggingIn(false), 2000);
+    loginMutation(loginData);
   };
+  console.log(error);
 
   return (
     <div className="md:min-h-screen mt-10  flex items-center justify-center p-2 sm:p-6 md:p-8 bg-gradient-to-br from-base-200 via-base-100 to-base-200">
@@ -88,6 +98,12 @@ const Login = () => {
               PK Verse
             </motion.span>
           </motion.div>
+
+          {error && (
+            <div className="alert  alert-error mb-4">
+              <span className="text-center" >{error.response.data.message}</span>
+            </div>
+          )}
 
           <div className="w-full mt-5">
             <div className="space-y-6">
@@ -214,17 +230,17 @@ const Login = () => {
               <motion.button
                 className="btn btn-lg text-xl btn-primary w-full h-16 rounded-xl shadow-xl shadow-primary/40 hover:shadow-2xl hover:shadow-primary/60 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-bold"
                 onClick={handleLogin}
-                disabled={isLoggingIn}
+                disabled={isPending}
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.7 }}
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
-                {isLoggingIn ? (
+                {isPending ? (
                   <div className="flex items-center gap-2">
                     <Loader2 className="size-6 animate-spin" />
-                    Signing in...
+                    Logging in...
                   </div>
                 ) : (
                   <div className="flex items-center gap-2">
@@ -323,7 +339,7 @@ const Login = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl" />
               <img
-                src="/i.png"
+                src="/world.png"
                 alt="Language connection illustration"
                 className="w-full h-full relative z-10 drop-shadow-2xl"
               />
