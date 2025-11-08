@@ -4,11 +4,11 @@ import useAuth from "./hooks/useAuth";
 import Call from "./pages/Call";
 import Chat from "./pages/Chat";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import Notifications from "./pages/Notifications";
 import Onboarding from "./pages/Onboarding";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
-import Login from "./pages/Login";
 
 function App() {
   const authUser = useAuth();
