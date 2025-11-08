@@ -30,7 +30,7 @@ function App() {
           path="/"
           element={
             isAuthenticated && isOnboarded ? (
-              <Layout>
+              <Layout showSidebar>
                 <Home />
               </Layout>
             ) : (
