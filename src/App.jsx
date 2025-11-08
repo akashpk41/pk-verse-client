@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router";
 import Call from "./pages/Call";
 import Chat from "./pages/Chat";
@@ -7,7 +8,6 @@ import Notifications from "./pages/Notifications";
 import Onboarding from "./pages/Onboarding";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
-import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
