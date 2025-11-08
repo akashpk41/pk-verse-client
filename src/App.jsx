@@ -11,11 +11,12 @@ import Notifications from "./pages/Notifications";
 import Onboarding from "./pages/Onboarding";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
+import { useThemeStore } from "./store/useThemeStore";
 
 function App() {
   const { authUser, isLoading } = useAuthUser();
   // console.log(authUser);
-
+const {theme} = useThemeStore()
   const isAuthenticated = Boolean(authUser);
   const isOnboarded = authUser?.isOnboarded;
 
@@ -24,7 +25,7 @@ function App() {
   }
 
   return (
-    <div className="h-screen">
+    <div className="h-screen" data-theme={theme}>
       <Routes>
         <Route
           path="/"
