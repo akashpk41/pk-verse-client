@@ -1,6 +1,7 @@
 import { Toaster } from "react-hot-toast";
 import { Navigate, Route, Routes } from "react-router";
-import useAuth from "./hooks/useAuth";
+import Loading from "./components/common/Loading";
+import useAuthUser from "./hooks/useAuthUser";
 import Call from "./pages/Call";
 import Chat from "./pages/Chat";
 import Home from "./pages/Home";
@@ -11,43 +12,52 @@ import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 
 function App() {
-  const authUser = useAuth();
-  console.log(authUser);
+  const { authUser, isLoading } = useAuthUser();
+  // console.log(authUser);
+
+  const isAuthenticated = Boolean(authUser);
+  const isOnboarded = isAuthenticated?.isOnboarded;
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="h-screen">
       <Routes>
         <Route
           path="/"
-          element={authUser ? <Home /> : <Navigate to="/login" />}
+          element={isAuthenticated ? <Home /> : <Navigate to="/login" />}
         />
         <Route
           path="/login"
-          element={!authUser ? <Login /> : <Navigate to="/" />}
+          element={!isAuthenticated ? <Login /> : <Navigate to="/" />}
         />
         <Route
           path="/signup"
-          element={!authUser ? <Signup /> : <Navigate to="/" />}
+          element={!isAuthenticated ? <Signup /> : <Navigate to="/" />}
         />
         <Route
           path="/notifications"
-          element={authUser ? <Notifications /> : <Navigate to="/login" />}
+          element={
+            isAuthenticated ? <Notifications /> : <Navigate to="/login" />
+          }
         />
         <Route
           path="/onboarding"
-          element={authUser ? <Onboarding /> : <Navigate to="/login" />}
+          element={isAuthenticated ? <Onboarding /> : <Navigate to="/login" />}
         />
         <Route
           path="/chat"
-          element={authUser ? <Chat /> : <Navigate to="/login" />}
+          element={isAuthenticated ? <Chat /> : <Navigate to="/login" />}
         />
         <Route
           path="/call"
-          element={authUser ? <Call /> : <Navigate to="/login" />}
+          element={isAuthenticated ? <Call /> : <Navigate to="/login" />}
         />
         <Route
           path="/profile"
-          element={authUser ? <Profile /> : <Navigate to="/login" />}
+          element={isAuthenticated ? <Profile /> : <Navigate to="/login" />}
         />
 
         {/* testing */}

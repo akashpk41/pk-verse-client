@@ -5,3 +5,8 @@ export const signup = async (formData) => {
 
   return data;
 };
+
+export const getAuthUser = async () => {
+  const { data } = await axiosInstance.get("/auth/me");
+  return data;
+};
