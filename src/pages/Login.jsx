@@ -100,8 +100,8 @@ const Login = () => {
           </motion.div>
 
           {error && (
-            <div className="alert  alert-error mb-4">
-              <span className="text-center" >{error.response.data.message}</span>
+            <div className="alert justify-center items-center flex alert-error mb-4">
+              <span className="" >{error.response.data.message}</span>
             </div>
           )}
 

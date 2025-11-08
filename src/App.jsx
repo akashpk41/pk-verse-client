@@ -1,6 +1,7 @@
 import { Toaster } from "react-hot-toast";
 import { Navigate, Route, Routes } from "react-router";
 import Loading from "./components/common/Loading";
+import Layout from "./components/layouts/Layout";
 import useAuthUser from "./hooks/useAuthUser";
 import Call from "./pages/Call";
 import Chat from "./pages/Chat";
@@ -29,7 +30,9 @@ function App() {
           path="/"
           element={
             isAuthenticated && isOnboarded ? (
-              <Home />
+              <Layout>
+                <Home />
+              </Layout>
             ) : (
               <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
             )
@@ -37,11 +40,23 @@ function App() {
         />
         <Route
           path="/login"
-          element={!isAuthenticated ? <Login /> : <Navigate to={isOnboarded ? "/" : "/onboarding"} />}
+          element={
+            !isAuthenticated ? (
+              <Login />
+            ) : (
+              <Navigate to={isOnboarded ? "/" : "/onboarding"} />
+            )
+          }
         />
         <Route
           path="/signup"
-          element={!isAuthenticated ? <Signup /> : <Navigate to={isOnboarded ? "/" : "/onboarding"} />}
+          element={
+            !isAuthenticated ? (
+              <Signup />
+            ) : (
+              <Navigate to={isOnboarded ? "/" : "/onboarding"} />
+            )
+          }
         />
         <Route
           path="/notifications"
@@ -75,7 +90,6 @@ function App() {
           path="/profile"
           element={isAuthenticated ? <Profile /> : <Navigate to="/login" />}
         />
-
       </Routes>
       <Toaster />
     </div>

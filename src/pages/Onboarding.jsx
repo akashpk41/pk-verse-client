@@ -1,13 +1,7 @@
-import { Camera, Shuffle, MapPin, Gem, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
+import { Camera, Gem, Loader2, MapPin, Shuffle } from "lucide-react";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  LoaderIcon,
-  MapPinIcon,
-  ShipWheelIcon,
-  ShuffleIcon,
-} from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { LANGUAGES } from "../constants";

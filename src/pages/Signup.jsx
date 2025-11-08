@@ -39,10 +39,11 @@ const Signup = () => {
   const handleSignup = (e) => {
     e.preventDefault();
 
-    if (formData.fullName.length < 3) return toast.error("Name Is To Short🙂");
-
     if (!formData.fullName.trim())
       return toast.error("Full Name Is Required🙂");
+
+    if (formData.fullName.length < 3) return toast.error("Name Is To Short🙂");
+
     if (!formData.email.trim()) return toast.error("Email Is Required😎");
     if (!/\S+@\S+\.\S+/.test(formData.email))
       return toast.error("Invalid Email Format😒");
