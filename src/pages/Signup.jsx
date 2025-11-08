@@ -54,7 +54,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="md:min-h-screen mt-10 flex items-center justify-center p-1 sm:p-6 md:p-8 bg-gradient-to-br from-base-200 via-base-100 to-base-200">
+    <div className="md:min-h-screen mt-10 flex items-center justify-center p-2 sm:p-6 md:p-8 bg-gradient-to-br from-base-200 via-base-100 to-base-200">
       <motion.div className="border-2 border-primary/50 flex flex-col md:flex-row w-full max-w-6xl mx-auto bg-base-100/80 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden relative">
         {/* Animated background glow */}
         <motion.div

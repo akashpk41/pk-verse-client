@@ -76,8 +76,6 @@ function App() {
           element={isAuthenticated ? <Profile /> : <Navigate to="/login" />}
         />
 
-        {/* testing */}
-        {/* <Route path="/onboarding" element={<Onboarding />} /> */}
       </Routes>
       <Toaster />
     </div>
