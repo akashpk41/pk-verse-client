@@ -7,6 +7,7 @@ import Notifications from "./pages/Notifications";
 import Onboarding from "./pages/Onboarding";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/call" element={<Call />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
+      <Toaster />
     </div>
   );
 }
