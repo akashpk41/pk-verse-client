@@ -1,6 +1,7 @@
-import { Link } from "react-router";
-import { MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { MapPin, MessageCircle } from "lucide-react";
+
+import { Link } from "react-router";
 import { LANGUAGE_TO_FLAG } from "../../constants/index";
 
 const FriendCard = ({ friend }) => {
@@ -27,7 +28,7 @@ const FriendCard = ({ friend }) => {
 
       <div className="p-5 space-y-4 relative z-10">
         {/* USER INFO */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-start gap-3">
           {/* Avatar with animated ring */}
           <div className="relative flex-shrink-0">
             {/* Rotating ring */}
@@ -81,11 +82,28 @@ const FriendCard = ({ friend }) => {
             />
           </div>
 
-          {/* Name */}
-          <h3 className="font-bold text-base bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent truncate flex-1">
-            {friend.fullName}
-          </h3>
+          {/* Name and Location */}
+          <div className="flex-1 min-w-0">
+            <h3 className="font-bold text-base bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent truncate">
+              {friend.fullName}
+            </h3>
+            {friend.location && (
+              <div className="flex items-center gap-1 text-sm opacity-70 mt-1">
+                <MapPin className="size-3 text-primary flex-shrink-0" />
+                <span className="truncate">{friend.location}</span>
+              </div>
+            )}
+          </div>
         </div>
+
+        {/* Bio - if exists */}
+        {friend.bio && (
+          <div className="p-3 rounded-xl bg-base-200/50 border border-base-content/10">
+            <p className="text-sm opacity-80 line-clamp-2">
+              "{friend.bio}"
+            </p>
+          </div>
+        )}
 
         {/* Languages */}
         <div className="space-y-2">
@@ -93,7 +111,7 @@ const FriendCard = ({ friend }) => {
           <div className="flex items-center gap-2 p-2 rounded-lg bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20">
             {getLanguageFlag(friend.nativeLanguage)}
             <div className="flex-1 min-w-0">
-              <p className="text-xs opacity-70 font-semibold">Native</p>
+              <p className="text-xs opacity-70 font-semibold">Native Speaker</p>
               <p className="text-sm font-bold text-primary truncate capitalize">
                 {friend.nativeLanguage}
               </p>
@@ -104,15 +122,13 @@ const FriendCard = ({ friend }) => {
           <div className="flex items-center gap-2 p-2 rounded-lg bg-base-300/50 border border-base-content/10">
             {getLanguageFlag(friend.learningLanguage)}
             <div className="flex-1 min-w-0">
-              <p className="text-xs opacity-70 font-semibold">Learning</p>
+              <p className="text-xs opacity-70 font-semibold">Currently Learning</p>
               <p className="text-sm font-bold truncate capitalize">
                 {friend.learningLanguage}
               </p>
             </div>
           </div>
         </div>
-
-
 
         {/* Message Button */}
         <Link to={`/chat/${friend._id}`}>
@@ -126,16 +142,11 @@ const FriendCard = ({ friend }) => {
           </motion.button>
         </Link>
       </div>
-
-
-
-
     </motion.div>
   );
 };
 
 export default FriendCard;
-
 export function getLanguageFlag(language) {
   if (!language) return null;
 
