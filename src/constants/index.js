@@ -48,7 +48,7 @@ export const THEMES = [
     colors: ["#1b2430", "#9d8b7e", "#4a8d7b", "#232c39"],
     icon: Waves,
   },
-   {
+  {
     name: "halloween",
     label: "PK2",
     colors: ["#0d0d0d", "#ff7800", "#006400", "#ffffff"],
