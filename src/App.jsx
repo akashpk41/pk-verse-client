@@ -2,6 +2,7 @@ import { Toaster } from "react-hot-toast";
 import { Navigate, Route, Routes } from "react-router";
 import Loading from "./components/common/Loading";
 import Layout from "./components/layouts/Layout";
+import Navbar from "./components/layouts/Navbar";
 import useAuthUser from "./hooks/useAuthUser";
 import Call from "./pages/Call";
 import Chat from "./pages/Chat";
@@ -12,12 +13,11 @@ import Onboarding from "./pages/Onboarding";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import { useThemeStore } from "./store/useThemeStore";
-import Navbar from "./components/layouts/Navbar";
 
 function App() {
   const { authUser, isLoading } = useAuthUser();
   // console.log(authUser);
-const {theme} = useThemeStore()
+  const { theme } = useThemeStore();
   const isAuthenticated = Boolean(authUser);
   const isOnboarded = authUser?.isOnboarded;
 

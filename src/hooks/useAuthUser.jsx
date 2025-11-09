@@ -7,7 +7,7 @@ export default function useAuth() {
     queryFn: getAuthUser,
     retry: false,
   });
-
+ 
   const authUser = authData?.user;
   return { authUser, isLoading };
 }
