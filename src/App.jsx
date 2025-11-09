@@ -12,6 +12,7 @@ import Onboarding from "./pages/Onboarding";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import { useThemeStore } from "./store/useThemeStore";
+import Navbar from "./components/layouts/Navbar";
 
 function App() {
   const { authUser, isLoading } = useAuthUser();
@@ -26,6 +27,7 @@ const {theme} = useThemeStore()
 
   return (
     <div className="h-screen" data-theme={theme}>
+      <Navbar />
       <Routes>
         <Route
           path="/"
