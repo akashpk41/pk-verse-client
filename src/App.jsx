@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from "react-router";
 import Loading from "./components/common/Loading";
 import Layout from "./components/layouts/Layout";
 import useAuthUser from "./hooks/useAuthUser";
-import Call from "./pages/Call";
+import CallPage from "./pages/CallPage";
 import ChatPage from "./pages/ChatPage";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -12,7 +12,6 @@ import Onboarding from "./pages/Onboarding";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import { useThemeStore } from "./store/useThemeStore";
-import FriendCard from "./components/Peoples/FriendCard";
 
 function App() {
   const { authUser, isLoading } = useAuthUser();
@@ -100,20 +99,26 @@ function App() {
           }
         />
         <Route
-                  path="/chat/:id"
-                  element={
-                    isAuthenticated && isOnboarded ? (
-                      <Layout showSidebar={false}>
-                        <ChatPage />
-                      </Layout>
-                    ) : (
-                      <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
-                    )
-                  }
-                />
+          path="/chat/:id"
+          element={
+            isAuthenticated && isOnboarded ? (
+              <Layout showSidebar={false}>
+                <ChatPage />
+              </Layout>
+            ) : (
+              <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
+            )
+          }
+        />
         <Route
-          path="/call"
-          element={isAuthenticated ? <Call /> : <Navigate to="/login" />}
+          path="/call/:id"
+          element={
+            isAuthenticated && isOnboarded ? (
+              <CallPage />
+            ) : (
+              <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
+            )
+          }
         />
         <Route
           path="/profile"
