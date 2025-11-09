@@ -27,7 +27,7 @@ function App() {
 
   return (
     <div className="h-screen" data-theme={theme}>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
         <Route
           path="/"
