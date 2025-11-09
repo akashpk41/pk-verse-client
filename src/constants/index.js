@@ -244,7 +244,7 @@ export const THEMES = [
 ];
 
 export const LANGUAGES = [
-  "Bengali",
+  "Bangla",
   "English",
   "Hindi",
   "Spanish",
@@ -262,7 +262,7 @@ export const LANGUAGES = [
 ];
 
 export const LANGUAGE_TO_FLAG = {
-  Bengali: "bd",
+  bangla: "bd",
   english: "gb",
   hindi: "in",
   spanish: "es",

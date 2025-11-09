@@ -2,7 +2,6 @@ import { Toaster } from "react-hot-toast";
 import { Navigate, Route, Routes } from "react-router";
 import Loading from "./components/common/Loading";
 import Layout from "./components/layouts/Layout";
-import Navbar from "./components/layouts/Navbar";
 import useAuthUser from "./hooks/useAuthUser";
 import Call from "./pages/Call";
 import Chat from "./pages/Chat";
@@ -64,7 +63,13 @@ function App() {
         <Route
           path="/notifications"
           element={
-            isAuthenticated ? <Notifications /> : <Navigate to="/login" />
+            isAuthenticated && isOnboarded ? (
+              <Layout showSidebar>
+                <Notifications />
+              </Layout>
+            ) : (
+              <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
+            )
           }
         />
         <Route
