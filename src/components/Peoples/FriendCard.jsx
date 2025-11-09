@@ -63,7 +63,7 @@ const FriendCard = ({ friend }) => {
             {/* Avatar */}
             <div className="avatar relative">
               <div className="w-14 h-14 rounded-full ring-4 ring-base-100">
-                <img src={friend.profilePic} alt={friend.fullName} />
+                <img src={friend?.profilePic} alt={friend?.fullName} />
               </div>
             </div>
 
@@ -112,7 +112,7 @@ const FriendCard = ({ friend }) => {
           </div>
         </div>
 
-        
+
 
         {/* Message Button */}
         <Link to={`/chat/${friend._id}`}>

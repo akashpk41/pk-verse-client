@@ -23,8 +23,8 @@ export default function Navbar() {
   });
 
   const navItems = [
-    { path: "/notifications", icon: Bell, label: "Notifications" },
     { path: "/", icon: Home, label: "Home" },
+    { path: "/notifications", icon: Bell, label: "Notifications" },
     { path: "/friends", icon: Users, label: "Friends" },
     { path: "/profile", icon: User, label: "Profile" },
   ];
