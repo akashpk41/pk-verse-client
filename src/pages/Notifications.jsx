@@ -46,7 +46,7 @@ const Notifications = () => {
           >
             <Bell className="size-8 sm:size-10 text-primary" />
           </motion.div>
-          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          <h1 className="text-3xl text-center md:text-start sm:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             Notifications
           </h1>
         </motion.div>
