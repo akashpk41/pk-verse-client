@@ -15,8 +15,8 @@ import {
   Thread,
   Window,
 } from "stream-chat-react";
-import ChatLoader from "../components/common/ChatLoader";
 import CallButton from "../components/common/CallButton";
+import ChatLoader from "../components/common/ChatLoader";
 
 const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY;
 
@@ -86,7 +86,6 @@ export default function ChatPage() {
       toast.success("Video call link sent successfully!");
     }
   };
-
 
   if (loading || !chatClient || !channel) return <ChatLoader />;
 

@@ -1,8 +1,15 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { acceptFriendRequest, getFriendRequests } from "../lib/api";
-import { Bell, UserCheck, MessageCircle, Clock, Loader2, CheckCircle, Send } from "lucide-react";
 import { motion } from "framer-motion";
+import {
+  Bell,
+  CheckCircle,
+  Clock,
+  Loader2,
+  Send,
+  UserCheck,
+} from "lucide-react";
 import { Link } from "react-router";
+import { acceptFriendRequest, getFriendRequests } from "../lib/api";
 
 const Notifications = () => {
   const queryClient = useQueryClient();
@@ -96,7 +103,9 @@ const Notifications = () => {
               >
                 <div className="flex items-center gap-3">
                   <UserCheck className="size-6 text-primary" />
-                  <h2 className="text-xl sm:text-2xl font-bold">Friend Requests</h2>
+                  <h2 className="text-xl sm:text-2xl font-bold">
+                    Friend Requests
+                  </h2>
                   <span className="badge badge-primary badge-lg shadow-lg shadow-primary/40">
                     {incomingRequests.length}
                   </span>
@@ -113,9 +122,7 @@ const Notifications = () => {
                       whileHover={{ y: -3 }}
                     >
                       {/* Animated background glow */}
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      />
+                      <motion.div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                       <div className="p-4 sm:p-5 relative z-10">
                         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -126,7 +133,8 @@ const Notifications = () => {
                               <motion.div
                                 className="absolute -inset-1 rounded-full"
                                 style={{
-                                  background: "linear-gradient(45deg, var(--p), var(--s), var(--a))",
+                                  background:
+                                    "linear-gradient(45deg, var(--p), var(--s), var(--a))",
                                 }}
                                 animate={{
                                   rotate: 360,
@@ -151,7 +159,10 @@ const Notifications = () => {
                               />
                               <div className="avatar relative">
                                 <div className="w-14 h-14 rounded-full ring-4 ring-base-100">
-                                  <img src={request?.sender?.profilePic} alt={request?.sender?.fullName} />
+                                  <img
+                                    src={request?.sender?.profilePic}
+                                    alt={request?.sender?.fullName}
+                                  />
                                 </div>
                               </div>
                               <motion.span
@@ -194,7 +205,9 @@ const Notifications = () => {
                             {isPending ? (
                               <>
                                 <Loader2 className="size-4 animate-spin" />
-                                <span className="hidden sm:inline">Processing...</span>
+                                <span className="hidden sm:inline">
+                                  Processing...
+                                </span>
                               </>
                             ) : (
                               <>
@@ -221,7 +234,9 @@ const Notifications = () => {
               >
                 <div className="flex items-center gap-3">
                   <Bell className="size-6 text-success" />
-                  <h2 className="text-xl sm:text-2xl font-bold">New Connections</h2>
+                  <h2 className="text-xl sm:text-2xl font-bold">
+                    New Connections
+                  </h2>
                 </div>
 
                 <div className="space-y-3">
@@ -241,7 +256,8 @@ const Notifications = () => {
                             <motion.div
                               className="absolute -inset-1 rounded-full"
                               style={{
-                                background: "linear-gradient(45deg, var(--su), var(--p))",
+                                background:
+                                  "linear-gradient(45deg, var(--su), var(--p))",
                               }}
                               animate={{
                                 rotate: 360,
@@ -268,7 +284,8 @@ const Notifications = () => {
                               {notification?.recipient?.fullName}
                             </h3>
                             <p className="text-sm my-1 opacity-90">
-                              {notification?.recipient?.fullName} accepted your friend request
+                              {notification?.recipient?.fullName} accepted your
+                              friend request
                             </p>
                             <p className="text-xs flex items-center gap-1 opacity-60">
                               <Clock className="size-3" />
