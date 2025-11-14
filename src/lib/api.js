@@ -63,8 +63,6 @@ export async function acceptFriendRequest(requestId) {
   return response.data;
 }
 
-
-
 // STREAM
 
 export async function getStreamToken() {
